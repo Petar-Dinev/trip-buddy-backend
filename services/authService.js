@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET || 'aghsdjaskdlasldasdasgdhasjdkas';
 
 async function register(email, username, password) {
     const existingUser = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
@@ -13,7 +13,7 @@ async function register(email, username, password) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.crate({
+    const user = await User.create({
         email,
         username,
         password: hashedPassword

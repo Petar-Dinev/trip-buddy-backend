@@ -19,7 +19,11 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password is required!']
     }
-});
+},
+    {
+        timestamps: true
+    }
+);
 
 userSchema.index({ email: 1 }, {
     collation: {
