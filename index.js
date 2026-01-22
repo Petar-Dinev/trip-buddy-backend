@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv'
 import expressConfig from './configs/express.js';
 import dbConfig from './configs/db.js';
+import routesConfig from './configs/routes.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
@@ -15,9 +16,7 @@ async function start() {
 
     await dbConfig(app, DB_CONNECTION_STRING);
     expressConfig(app);
+    routesConfig(app);
 
-    app.get('/', (req, res) => {
-        res.json({ message: 'Hello world' });
-    })
     app.listen(PORT, () => console.log(`Server is listen at port ${PORT}`))
 }
